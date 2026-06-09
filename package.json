@@ -1,0 +1,19 @@
+{
+  "name": "txt2xcp-web",
+  "version": "1.0.0",
+  "description": "Browser-based ClassPad II text to XCP converter ported from txt2xcp.c.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "test:compat": "node --test test/xcp.compat.test.js",
+    "serve": "python3 -m http.server 8080"
+  },
+  "keywords": [
+    "classpad",
+    "xcp",
+    "casio",
+    "converter"
+  ],
+  "license": "MIT",
+  "devDependencies": {}
+}

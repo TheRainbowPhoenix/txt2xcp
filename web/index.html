@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>txt2xcp Web Converter</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/loader.js"></script>
+    <script type="module" src="./src/app.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">ClassPad II / fx-CP400</p>
+        <h1>txt2xcp Web Converter</h1>
+        <p>Paste ClassPad program text, preserve Unicode tokens such as <strong>⇒</strong>, <strong>lim</strong>, and <strong>diff</strong>, then download a browser-generated <code>.xcp</code> file.</p>
+      </div>
+      <button id="download" class="primary">Download .xcp</button>
+    </header>
+
+    <main class="layout">
+      <section class="panel editor-panel">
+        <div class="toolbar">
+          <h2>Program text</h2>
+          <button id="load-sample">Load L’Hôpital sample</button>
+        </div>
+        <div id="editor" aria-label="ClassPad source editor"></div>
+        <textarea id="fallback-editor" hidden spellcheck="false" aria-label="Fallback ClassPad source editor"></textarea>
+      </section>
+
+      <aside class="panel side-panel">
+        <h2>Export settings</h2>
+        <label>Folder name <input id="folder-name" maxlength="8" value="main"></label>
+        <label>Variable name <input id="variable-name" maxlength="8" value="lhopital"></label>
+        <label class="checkbox"><input id="convert-newlines" type="checkbox" checked> Convert line endings to calculator CR bytes</label>
+        <dl class="stats">
+          <div><dt>Payload</dt><dd><span id="payload-bytes">0</span> bytes</dd></div>
+          <div><dt>XCP file</dt><dd><span id="output-bytes">0</span> bytes</dd></div>
+          <div><dt>Checksum</dt><dd id="checksum">0x00</dd></div>
+        </dl>
+        <p id="status" class="status">Loading editor…</p>
+        <p class="note"><strong>Note:</strong> this ports the original text-to-XCP container writer to JavaScript. It does not claim to be a closed-source Casio bytecode compiler, so imports may still appear as program text on devices that require tokenized executables.</p>
+      </aside>
+
+      <section class="panel diagnostics-panel">
+        <h2>Diagnostics</h2>
+        <ul id="diagnostics"></ul>
+      </section>
+
+      <section class="panel transpiler-panel">
+        <div class="toolbar">
+          <h2>Experimental JavaScript sketch</h2>
+          <button id="copy-js">Copy JS</button>
+        </div>
+        <pre><code id="transpiled"></code></pre>
+      </section>
+    </main>
+  </body>
+</html>
